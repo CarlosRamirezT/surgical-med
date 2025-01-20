@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="surgical_delivery_package_number.list">
+      <field name="name">surgical_delivery_package_number list</field>
+      <field name="model">surgical_delivery_package_number.surgical_delivery_package_number</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="surgical_delivery_package_number.action_window">
+      <field name="name">surgical_delivery_package_number window</field>
+      <field name="res_model">surgical_delivery_package_number.surgical_delivery_package_number</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="surgical_delivery_package_number.action_server">
+      <field name="name">surgical_delivery_package_number server</field>
+      <field name="model_id" ref="model_surgical_delivery_package_number_surgical_delivery_package_number"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="surgical_delivery_package_number" id="surgical_delivery_package_number.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="surgical_delivery_package_number.menu_1" parent="surgical_delivery_package_number.menu_root"/>
+    <menuitem name="Menu 2" id="surgical_delivery_package_number.menu_2" parent="surgical_delivery_package_number.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="surgical_delivery_package_number.menu_1_list" parent="surgical_delivery_package_number.menu_1"
+              action="surgical_delivery_package_number.action_window"/>
+    <menuitem name="Server to list" id="surgical_delivery_package_number" parent="surgical_delivery_package_number.menu_2"
+              action="surgical_delivery_package_number.action_server"/>
+-->
+  </data>
+</odoo>
