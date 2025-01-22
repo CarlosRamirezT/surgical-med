@@ -9,5 +9,7 @@
     "category": "Delivery",
     "version": "17.0.1.0",
     "depends": ["delivery_package_number"],
-    "data": [],
+    "data": [
+        "views/stock_picking_views.xml"
+    ],
 }
