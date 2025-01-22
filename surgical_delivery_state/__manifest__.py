@@ -8,6 +8,6 @@
     "website": "https://github.com/OCA/delivery-carrier",
     "category": "Delivery",
     "version": "17.0.1.0",
-    "depends": ["delivery_package_number"],
+    "depends": ["delivery_state"],
     "data": [],
 }
