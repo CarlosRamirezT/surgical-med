@@ -8,6 +8,6 @@
     "website": "https://github.com/OCA/l10n-spain",
     "category": "Stock",
     "version": "17.0.1.0",
-    "depends": ["delivery_gls_asm"],
+    "depends": ["delivery_gls_asm", "surgical_delivery_package_number", "surgical_delivery_state"],
     "data": [],
 }
