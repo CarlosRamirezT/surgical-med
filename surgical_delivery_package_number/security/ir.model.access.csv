@@ -1,2 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_surgical_delivery_package_number_surgical_delivery_package_number,surgical_delivery_package_number.surgical_delivery_package_number,model_surgical_delivery_package_number_surgical_delivery_package_number,base.group_user,1,1,1,1
