@@ -14,24 +14,6 @@ from odoo.addons.delivery_gls_asm.models.gls_asm_request import GlsAsmRequest
 class DeliveryCarrier(models.Model):
     _inherit = "delivery.carrier"
 
-    # def _prepare_gls_asm_shipping(self, picking):
-    #     res = super(DeliveryCarrier, self)._prepare_gls_asm_shipping(picking)
-        
-    #     # update the customized values
-
-    #     res["destinatario_observaciones"] = (
-    #         picking.note and escape(picking.note) or ""
-    #     )
-    #     res["referencia_c"] = (
-    #         picking.origin
-    #         and escape(f"{picking.name}/{picking.origin}")
-    #         or escape(picking.name),
-    #     )  # Our unique reference
-
-    #     # return updated shipping values
-        
-    #     return res
-    
     def _prepare_gls_asm_shipping(self, picking):
         """Convert picking values for asm api
         :param picking record with picking to send
