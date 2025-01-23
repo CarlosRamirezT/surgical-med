@@ -1,0 +1,33 @@
+# Ignore all log files
+*.log
+
+# Ignore Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore virtual environments
+venv/
+.env/
+
+# Ignore IDE files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Ignore specific config files
+config.json
+secret_settings.py
+
+# Ignore node_modules folder (for Node.js projects)
+node_modules/
+
+# Ignore build output
+build/
+dist/
+
+# Ignore system files
+.DS_Store
+Thumbs.db
