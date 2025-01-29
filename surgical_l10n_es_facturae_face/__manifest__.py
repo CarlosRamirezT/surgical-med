@@ -10,6 +10,7 @@
         "l10n_es_facturae_face",
     ],
     "data": [
+        "views/report_facturae.xml",
     ],
     "installable": True,
     "maintainers": ["CarlosRamirezT (carlosdanielrt@gmail.com)",],
