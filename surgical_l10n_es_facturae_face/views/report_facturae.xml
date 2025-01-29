@@ -20,6 +20,10 @@
                 t-out="line.facturae_receiver_transaction_reference or move.facturae_receiver_transaction_reference or move.ref"
             />
         </xpath>
+        <xpath expr="//Invoices/Invoice/Items/InvoiceLine/DeliveryNotesReferences" position="replace">
+        <t t-set="line_picking_name" t-value="line._get_invoice_stock_picking_names()"/>
+            <DeliveryNotesReferences t-if="line_picking_name" t-esc="line_picking_name"/>
+        </xpath>
     </template>
 
 </odoo>

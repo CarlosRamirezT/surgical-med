@@ -8,6 +8,8 @@
     "website": "https://surgicalmed.es",
     "depends": [
         "l10n_es_facturae_face",
+        "stock",
+        "sale"
     ],
     "data": [
         "views/report_facturae.xml",
