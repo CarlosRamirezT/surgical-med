@@ -2,26 +2,25 @@
 <odoo>
 
     <template id="template_facturae_surgical" inherit_id="l10n_es_facturae.template_facturae">
-        <xpath
-            expr="//Invoices/Invoice/InvoiceIssueData/t/ReceiverTransactionReference"
+        <xpath expr="//Invoices/Invoice/InvoiceIssueData/t/ReceiverTransactionReference"
             position="replace">
             <ReceiverTransactionReference
-                t-esc="move.facturae_receiver_transaction_reference or move.ref"
-                t-length="20"
-                t-if="move.facturae_receiver_transaction_reference or move.ref"
-            />
+                t-esc="move.facturae_receiver_transaction_reference or move.ref" t-length="20"
+                t-if="move.facturae_receiver_transaction_reference or move.ref" />
         </xpath>
-        <xpath
-            expr="//Invoices/Invoice/Items/InvoiceLine/ReceiverTransactionReference"
+        <xpath expr="//Invoices/Invoice/Items/InvoiceLine/ReceiverTransactionReference"
             position="replace">
-            <ReceiverTransactionReference
-                t-length="20"
+            <ReceiverTransactionReference t-length="20"
                 t-if="line.facturae_receiver_transaction_reference or move.facturae_receiver_transaction_reference or move.ref"
-                t-out="line.facturae_receiver_transaction_reference or move.facturae_receiver_transaction_reference or move.ref"
-            />
+                t-out="line.facturae_receiver_transaction_reference or move.facturae_receiver_transaction_reference or move.ref" />
         </xpath>
-        <xpath expr="//Invoices/Invoice/Items/InvoiceLine/DeliveryNotesReferences" position="replace">
-            <DeliveryNotesReferences><DeliveryNote><DeliveryNoteNumber t-esc="line._get_invoice_stock_picking_names()"></DeliveryNoteNumber></DeliveryNote></DeliveryNotesReferences>
+        <xpath expr="//Invoices/Invoice/Items/InvoiceLine/DeliveryNotesReferences"
+            position="replace">
+            <DeliveryNotesReferences>
+                <DeliveryNote>
+                    <DeliveryNoteNumber t-esc="line._get_invoice_stock_picking_names()" />
+                </DeliveryNote>
+            </DeliveryNotesReferences>
         </xpath>
     </template>
 
