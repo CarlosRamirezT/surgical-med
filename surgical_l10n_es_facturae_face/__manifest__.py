@@ -18,4 +18,5 @@
     ],
     "installable": True,
     "maintainers": ["CarlosRamirezT (carlosdanielrt@gmail.com)",],
+    "post_init_hook": "post_init_hook",
 }
