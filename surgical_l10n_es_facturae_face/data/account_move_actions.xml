@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="action_send_facturae_to_face" model="ir.actions.server">
+        <field name="name">Send Facturae to FACe</field>
+        <field name="model_id" ref="account.model_account_move"/>
+        <field name="state">code</field>
+        <field name="binding_model_id" ref="account.model_account_move"/>
+        <field name="binding_type">action</field>
+        <field name="code">
+            records.manually_send_invoice_to_face()
+        </field>
+    </record>
+    
+</odoo>

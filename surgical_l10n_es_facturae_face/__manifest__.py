@@ -12,6 +12,8 @@
         "sale"
     ],
     "data": [
+        "data/account_move_actions.xml",
+        "data/edi_exchange_record_actions.xml",
         "views/report_facturae.xml",
     ],
     "installable": True,
