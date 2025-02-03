@@ -2,9 +2,9 @@
 <odoo>
     <record id="action_send_exchange_to_face" model="ir.actions.server">
         <field name="name">Send Manually to FACe</field>
-        <field name="model_id" ref="edi.model_edi_exchange_record"/>
+        <field name="model_id" ref="edi_oca.model_edi_exchange_record"/>
         <field name="state">code</field>
-        <field name="binding_model_id" ref="edi.model_edi_exchange_record"/>
+        <field name="binding_model_id" ref="edi_oca.model_edi_exchange_record"/>
         <field name="binding_type">action</field>
         <field name="code">
             records.manually_exchange_send()
