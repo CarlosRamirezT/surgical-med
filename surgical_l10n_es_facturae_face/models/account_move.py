@@ -1,4 +1,8 @@
+from datetime import timedelta
+
 from odoo import models, fields
+
+from odoo.fields import Datetime
 
 class AccountMove(models.Model):
     _inherit = 'account.move'
@@ -36,8 +40,14 @@ class AccountMoveLine(models.Model):
 
     def _get_invoice_stock_pickings(self):
         self.ensure_one()
-        order_ids = self.sudo().sale_line_ids.order_id
-        picking_ids = order_ids.picking_ids
+        self = self.sudo()
+        picking_ids = self.env['stock.picking'].sudo().search([
+            ('picking_type_code', '=', 'outgoing'),
+            ('state', 'in', ('confirmed', 'assigned', 'done')),
+            ('origin', '=', self.sale_line_ids.order_id.name),
+            ('date_done', '>=', Datetime.to_datetime(self.invoice_date)),
+            ('date_done', '<', Datetime.to_datetime(self.invoice_date) + timedelta(days=1)),
+        ])
         return picking_ids
     
     def _get_invoice_stock_picking_names(self):
