@@ -354,4 +354,13 @@
         </xpath>
     </template>
 
+    <template id="address_contact_surgical" inherit_id="l10n_es_facturae.address_contact">
+        <xpath expr="//ContactDetails/ContactPersons" position="replace">
+            <ContactPersons
+                t-length="40"
+                t-out="administrative_partnerl10n_es_facturae_customer_name or partnerl10n_es_facturae_customer_name"
+            />
+        </xpath>
+    </template>
+
 </odoo>
