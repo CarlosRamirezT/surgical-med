@@ -9,12 +9,14 @@
     "depends": [
         "l10n_es_facturae_face",
         "stock",
-        "sale"
+        "sale",
+        "stock_picking_invoice_link", # get it from http://github.com/oca/stock-logistics-workflow
     ],
     "data": [
         "data/account_move_actions.xml",
         "data/edi_exchange_record_actions.xml",
         "views/res_partner.xml",
+        "views/account_move_views.xml",
         "views/report_facturae.xml",
     ],
     "installable": True,

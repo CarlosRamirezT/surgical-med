@@ -348,7 +348,7 @@
             position="replace">
             <DeliveryNotesReferences>
                 <DeliveryNote>
-                    <DeliveryNoteNumber t-esc="line._get_invoice_stock_picking_names()" />
+                    <DeliveryNoteNumber t-esc="line.get_delivery_note_numbers()" />
                 </DeliveryNote>
             </DeliveryNotesReferences>
         </xpath>
