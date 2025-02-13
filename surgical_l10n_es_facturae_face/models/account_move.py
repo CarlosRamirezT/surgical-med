@@ -61,15 +61,29 @@ class AccountMove(models.Model):
             )
             exchange_record.action_exchange_generate()
 
-    def action_post(self):
-        # first set the required fields if not set
-        # instead of computing them to consume too much ram
+    def compute_facturae_fields(self):
         for invoice in self.filtered(lambda invoice: invoice.move_type == 'out_invoice'):
             invoice.company_id.partner_id._compute_l10n_es_facturae_customer_name()
             invoice.partner_id._compute_l10n_es_facturae_customer_name()
             invoice.invoice_line_ids._compute_picking_ids()
             invoice._compute_picking_ids()
+
+    def action_post(self):
+        # first set the required fields if not set
+        # instead of computing them to consume too much ram
+        self.compute_facturae_fields()
         return super(AccountMove, self).action_post()
+    
+    def button_draft(self):
+        res = super(AccountMove, self).button_draft()
+        self.compute_facturae_fields()
+        return res
+    
+    @api.model_create_multi
+    def create(self, vals_list):
+        invoice_ids = super(AccountMove, self).create(vals_list)
+        invoice_ids.compute_facturae_fields()
+        return invoice_ids
 
 class AccountMoveLine(models.Model):
     _inherit = 'account.move.line'
