@@ -10,7 +10,8 @@
                 <field name="picking_ids" widget="many2many_tags"/>
             </xpath>
             <xpath expr="//field[@name='invoice_line_ids']//tree" position="inside">
-                <field name="picking_ids" widget="many2many_tags"/>
+                <field name="picking_ids" widget="many2many_tags" optional="show"/>
+                <field name="facturae_issuer_transaction_reference" optional="hide"/>
             </xpath>
         </field>
         </record>
