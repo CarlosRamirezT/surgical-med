@@ -61,10 +61,10 @@ class AccountMoveLine(models.Model):
     def _compute_picking_ids(self):
         # if the invoice has no pickings related, try and find them using the OCAs module logic
         # otherwise just add all the related pickings from the sales order.
-        for invoice in self.filtered(lambda invoice: not invoice.picking_ids):
-            invoice.picking_ids = invoice.mapped(
+        for line in self.filtered(lambda line: not line.picking_ids):
+            line.picking_ids = line.mapped(
                 "move_line_ids.picking_id"
-            ) or self._get_invoice_stock_pickings_from_sale_order()
+            ) or line._get_invoice_stock_pickings_from_sale_order()
 
     def _get_invoice_stock_pickings_from_sale_order(self):
         self.ensure_one()
