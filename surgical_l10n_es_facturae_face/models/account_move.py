@@ -11,17 +11,28 @@ _logger = logging.getLogger(__name__)
 class AccountMove(models.Model):
     _inherit = 'account.move'
 
-    @api.depends("invoice_line_ids", "invoice_line_ids.picking_ids")
+    # remove the compute from this fields, it takes way too many resources.
+    # only execute this on invoice validation
+
+    picking_ids = fields.Many2many(
+        comodel_name="stock.picking",
+        string="Related Pickings",
+        store=True,
+        compute=False,
+        help="Related pickings (only when the invoice has been generated from a sale "
+        "order).",
+    )
+
     def _compute_picking_ids(self):
         # if module is installing, ignore this. it is going to take too long
         if self._context.get('install_mode') or self.env.context.get('install_mode'):
             _logger.warning("Install mode detected, ignoring _compute_picking_ids")
             return
-        # # override OCAs module logic to instad just mapped the pickings in the lines
-        # for invoice in self:
-        #     invoice.picking_ids = invoice.mapped(
-        #         "invoice_line_ids.picking_ids"
-        #     )
+        # override OCAs module logic to instad just mapped the pickings in the lines
+        for invoice in self:
+            invoice.picking_ids = invoice.mapped(
+                "invoice_line_ids.picking_ids"
+            )
 
     def manually_send_invoice_to_face(self):
         for record in self:
@@ -50,6 +61,15 @@ class AccountMove(models.Model):
             )
             exchange_record.action_exchange_generate()
 
+    def action_post(self):
+        # first set the required fields if not set
+        # instead of computing them to consume too much ram
+        for invoice in self.filtered(lambda invoice: invoice.move_type == 'out_invoice'):
+            invoice.company_id.partner_id._compute_l10n_es_facturae_customer_name()
+            invoice.partner_id._compute_l10n_es_facturae_customer_name()
+            invoice.invoice_line_ids._compute_picking_ids()
+            invoice._compute_picking_ids()
+        return super(AccountMove, self).action_post()
 
 class AccountMoveLine(models.Model):
     _inherit = 'account.move.line'
@@ -58,21 +78,20 @@ class AccountMoveLine(models.Model):
         comodel_name="stock.picking",
         string="Related Pickings",
         store=True,
-        compute="_compute_picking_ids",
+        compute=False,
         help="Related pickings (only when the invoice has been generated from a sale "
         "order).",
         readonly=False,
     )
 
-    @api.depends("move_line_ids")
     def _compute_picking_ids(self):
         # if module is installing, ignore this. it is going to take too long
         if self._context.get('install_mode') or self.env.context.get('install_mode'):
             _logger.warning("Install mode detected, ignoring _compute_picking_ids")
             return
         # # Filtramos las facturas (líneas) que no tienen pickings asignados.
-        # for line in self.filtered(lambda line: not line.picking_ids):
-        #     line.picking_ids = line.mapped("move_line_ids.picking_id") or line._get_invoice_stock_pickings_from_sale_order()
+        for line in self.filtered(lambda line: not line.picking_ids):
+            line.picking_ids = line.mapped("move_line_ids.picking_id") or line._get_invoice_stock_pickings_from_sale_order()
 
     def _get_invoice_stock_pickings_from_sale_order(self):
         self.ensure_one()
