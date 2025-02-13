@@ -1,9 +1,12 @@
 from datetime import timedelta
+import logging
 
 from odoo import models, fields, api, _
 
 from odoo.fields import Datetime
 from odoo.exceptions import ValidationError
+
+_logger = logging.getLogger(__name__)
 
 class AccountMove(models.Model):
     _inherit = 'account.move'
@@ -12,12 +15,13 @@ class AccountMove(models.Model):
     def _compute_picking_ids(self):
         # if module is installing, ignore this. it is going to take too long
         if self._context.get('install_mode') or self.env.context.get('install_mode'):
+            _logger.warning("Install mode detected, ignoring _compute_picking_ids")
             return
-        # override OCAs module logic to instad just mapped the pickings in the lines
-        for invoice in self:
-            invoice.picking_ids = invoice.mapped(
-                "invoice_line_ids.picking_ids"
-            )
+        # # override OCAs module logic to instad just mapped the pickings in the lines
+        # for invoice in self:
+        #     invoice.picking_ids = invoice.mapped(
+        #         "invoice_line_ids.picking_ids"
+        #     )
 
     def manually_send_invoice_to_face(self):
         for record in self:
@@ -64,10 +68,11 @@ class AccountMoveLine(models.Model):
     def _compute_picking_ids(self):
         # if module is installing, ignore this. it is going to take too long
         if self._context.get('install_mode') or self.env.context.get('install_mode'):
+            _logger.warning("Install mode detected, ignoring _compute_picking_ids")
             return
-        # Filtramos las facturas (líneas) que no tienen pickings asignados.
-        for line in self.filtered(lambda line: not line.picking_ids):
-            line.picking_ids = line.mapped("move_line_ids.picking_id") or line._get_invoice_stock_pickings_from_sale_order()
+        # # Filtramos las facturas (líneas) que no tienen pickings asignados.
+        # for line in self.filtered(lambda line: not line.picking_ids):
+        #     line.picking_ids = line.mapped("move_line_ids.picking_id") or line._get_invoice_stock_pickings_from_sale_order()
 
     def _get_invoice_stock_pickings_from_sale_order(self):
         self.ensure_one()
