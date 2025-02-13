@@ -25,4 +25,8 @@ class ResPartner(models.Model):
     def _get_facturae_format_name(self):
         self.ensure_one()
         return self.comercial[:40] or self.name[:40]
-
+    
+    def write(self, vals):
+        res = super(ResPartner, self).write(vals)
+        self._compute_l10n_es_facturae_customer_name()
+        return res
