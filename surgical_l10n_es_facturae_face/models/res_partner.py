@@ -12,6 +12,9 @@ class ResPartner(models.Model):
     )
     
     def _compute_l10n_es_facturae_customer_name(self):
+        # if module is installing, ignore this. it is going to take too long
+        if self._context.get('install_mode'):
+            return
         for partner in self.filtered(lambda partner: partner.facturae and not partner.l10n_es_facturae_customer_name):
             partner.l10n_es_facturae_customer_name = partner._get_facturae_format_name()
 
