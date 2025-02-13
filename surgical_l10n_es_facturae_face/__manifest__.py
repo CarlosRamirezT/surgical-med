@@ -18,6 +18,7 @@
         "views/res_partner.xml",
         "views/account_move_views.xml",
         "views/report_facturae.xml",
+        "views/res_config_settings.xml",
     ],
     "installable": True,
     "maintainers": ["CarlosRamirezT (carlosdanielrt@gmail.com)",],
