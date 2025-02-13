@@ -24,5 +24,5 @@ class ResPartner(models.Model):
 
     def _get_facturae_format_name(self):
         self.ensure_one()
-        return self.name[:40]
+        return self.comercial[:40] or self.name[:40]
 
