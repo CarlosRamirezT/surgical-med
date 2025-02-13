@@ -60,18 +60,8 @@ class AccountMoveLine(models.Model):
     @api.depends("move_line_ids")
     def _compute_picking_ids(self):
         # Filtramos las facturas (líneas) que no tienen pickings asignados.
-        lines_to_process = self.filtered(lambda line: not line.picking_ids)
-        total_lines = len(lines_to_process)
-        batch_counter = 0
-
-        for line in lines_to_process:
-            # Asignamos los pickings: primero obtenemos los pickings de move_line_ids;
-            # si no hay, se invoca la lógica extra para obtenerlos desde la orden de venta.
+        for line in self.filtered(lambda line: not line.picking_ids):
             line.picking_ids = line.mapped("move_line_ids.picking_id") or line._get_invoice_stock_pickings_from_sale_order()
-            batch_counter += 1
-            # Cada 50 líneas, se hace un commit para liberar los recursos de la RAM.
-            if batch_counter % 50 == 0 or batch_counter == total_lines:
-                self.env.cr.commit()
 
     def _get_invoice_stock_pickings_from_sale_order(self):
         self.ensure_one()
