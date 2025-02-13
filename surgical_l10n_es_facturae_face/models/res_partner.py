@@ -8,7 +8,7 @@ class ResPartner(models.Model):
     _inherit = "res.partner"
 
     l10n_es_facturae_customer_name = fields.Char(
-        "Customer Name for Facturae", 
+        "Nombre en la Factura-e", 
         help="This name will be used when sending the Electronico Invoices to FACe. In case system record differ from FACe acceptance criteria of 40 characters limit.",
         store=True,
         compute=False

@@ -3,11 +3,11 @@
     <record id="view_partner_form" model="ir.ui.view">
         <field name="name">res.partner.form</field>
         <field name="model">res.partner</field>
-        <field name="inherit_id" ref="l10n_es_facturae.view_partner_form" />
+        <field name="inherit_id" ref="base.view_partner_form" />
         <field name="type">form</field>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='facturae']" position="after">
-                <field name="l10n_es_facturae_customer_name" attrs="{'invisible': [('facturae', '=', False)]}"/>
+            <xpath expr="//div[hasclass('o_address_format')]" position="after">
+                <field name="l10n_es_facturae_customer_name"/>
             </xpath>
         </field>
     </record>
