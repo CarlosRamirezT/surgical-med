@@ -11,7 +11,7 @@ class AccountMove(models.Model):
     @api.depends("invoice_line_ids", "invoice_line_ids.picking_ids")
     def _compute_picking_ids(self):
         # if module is installing, ignore this. it is going to take too long
-        if self._context.get('install_mode'):
+        if self._context.get('install_mode') or self.env.context.get('install_mode'):
             return
         # override OCAs module logic to instad just mapped the pickings in the lines
         for invoice in self:
@@ -63,7 +63,7 @@ class AccountMoveLine(models.Model):
     @api.depends("move_line_ids")
     def _compute_picking_ids(self):
         # if module is installing, ignore this. it is going to take too long
-        if self._context.get('install_mode'):
+        if self._context.get('install_mode') or self.env.context.get('install_mode'):
             return
         # Filtramos las facturas (líneas) que no tienen pickings asignados.
         for line in self.filtered(lambda line: not line.picking_ids):
