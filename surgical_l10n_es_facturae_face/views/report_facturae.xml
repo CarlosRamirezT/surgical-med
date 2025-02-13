@@ -355,12 +355,13 @@
     </template>
 
     <template id="address_contact_surgical" inherit_id="l10n_es_facturae.address_contact">
-        <xpath expr="//ContactDetails/ContactPersons" position="replace">
-            <ContactPersons
-                t-length="40"
-                t-out="administrative_partner.l10n_es_facturae_customer_name or partner.l10n_es_facturae_customer_name"
-            />
-        </xpath>
-    </template>
+    <xpath expr="//ContactDetails/ContactPersons" position="replace">
+        <ContactPersons
+            t-length="40"
+            t-out="((administrative_partner and administrative_partner.l10n_es_facturae_customer_name) or partner.l10n_es_facturae_customer_name or '')"
+        />
+    </xpath>
+</template>
+
 
 </odoo>

@@ -108,8 +108,6 @@ class AccountMoveLine(models.Model):
         # and if no pickings are found try and get them from a sales order search.
         # ensure all the pickings are added
         self._compute_picking_ids()
-        if not self.picking_ids:
-            raise ValidationError(_("No Stock Pickings could be found for product %s. Please add them manually.") % self.product_id.name)
         picking_names = self.picking_ids and ",".join(self.picking_ids.mapped('name')) or ''
         return picking_names
     
