@@ -348,7 +348,7 @@
             position="replace">
             <DeliveryNotesReferences>
                 <DeliveryNote>
-                    <DeliveryNoteNumber t-esc="line.get_delivery_note_numbers()" />
+                    <DeliveryNoteNumber t-esc="line.get_invoice_stock_picking_names()" />
                 </DeliveryNote>
             </DeliveryNotesReferences>
         </xpath>
@@ -358,7 +358,7 @@
         <xpath expr="//ContactDetails/ContactPersons" position="replace">
             <ContactPersons
                 t-length="40"
-                t-out="administrative_partnerl10n_es_facturae_customer_name or partnerl10n_es_facturae_customer_name"
+                t-out="administrative_partner.l10n_es_facturae_customer_name or partner.l10n_es_facturae_customer_name"
             />
         </xpath>
     </template>

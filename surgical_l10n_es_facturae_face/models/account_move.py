@@ -1,11 +1,20 @@
 from datetime import timedelta
 
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 
 from odoo.fields import Datetime
+from odoo.exceptions import ValidationError
 
 class AccountMove(models.Model):
     _inherit = 'account.move'
+
+    @api.depends("invoice_line_ids", "invoice_line_ids.picking_ids")
+    def _compute_picking_ids(self):
+        # override OCAs module logic to instad just mapped the pickings in the lines
+        for invoice in self:
+            invoice.picking_ids = invoice.mapped(
+                "invoice_line_ids.picking_ids"
+            )
 
     def manually_send_invoice_to_face(self):
         for record in self:
@@ -45,16 +54,35 @@ class AccountMoveLine(models.Model):
         compute="_compute_picking_ids",
         help="Related pickings (only when the invoice has been generated from a sale "
         "order).",
+        readonly=False,
     )
 
     @api.depends("move_line_ids")
     def _compute_picking_ids(self):
-        for invoice in self:
+        # if the invoice has no pickings related, try and find them using the OCAs module logic
+        # otherwise just add all the related pickings from the sales order.
+        for invoice in self.filtered(lambda invoice: not invoice.picking_ids):
             invoice.picking_ids = invoice.mapped(
                 "move_line_ids.picking_id"
-            )
+            ) or self._get_invoice_stock_pickings_from_sale_order()
 
-    def get_delivery_note_numbers(self):
+    def _get_invoice_stock_pickings_from_sale_order(self):
+        self.ensure_one()
+        self = self.sudo()
+        picking_ids = self.env['stock.picking'].sudo().search([
+            ('picking_type_code', '=', 'outgoing'),
+            ('state', 'in', ('confirmed', 'assigned', 'done')),
+            ('origin', '=', self.sale_line_ids.order_id.name),
+        ])
+        return picking_ids
+    
+    def get_invoice_stock_picking_names(self):
+        # try and get the pickings associated to this invoice when created from sales order
+        # and if no pickings are found try and get them from a sales order search.
+        # ensure all the pickings are added
+        self._compute_picking_ids()
+        if not self.picking_ids:
+            raise ValidationError(_("No Stock Pickings could be found for product %s. Please add them manually.") % self.product_id.name)
         picking_names = self.picking_ids and ",".join(self.picking_ids.mapped('name')) or ''
         return picking_names
     
