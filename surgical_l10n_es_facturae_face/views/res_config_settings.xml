@@ -22,6 +22,18 @@
                             </div>
                         </div>
                     </div>
+                    <div id="facturae_send_customer_credit_notes_to_face" class="col-12 col-lg-12 o_setting_box">
+                        <div class="o_setting_left_pane">
+                            <field name="facturae_send_customer_credit_notes_to_face" readonly="False" />
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="facturae_send_customer_credit_notes_to_face" string="Send Customer Credit Notes to FACe" />
+                            <div class="text-muted">
+                                If Enabled, customer credit notes will be send to face. Otherwise, the new invoice will be uploaded to FACe instead
+                                of correcting the old one. And the customer will be notified.
+                            </div>
+                        </div>
+                    </div>
                 </block>
             </xpath>
         </field>

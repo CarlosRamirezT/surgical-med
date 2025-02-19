@@ -11,6 +11,13 @@ class AccountMoveL10nEsFacturaeListener(Component):
     def on_post_account_move(self, records):
         # use our new method without jobs so the user works faster
         for record in records:
+
+            company = record.company_id
+            
+            # check if customer credit notes should be send to FACe
+            if record.move_type == 'out_refund' and not company.facturae_send_customer_credit_notes_to_face:
+                continue
+
             if record.facturae_send_invoice_manually_to_face_on_submit:
 
                 records.manually_send_invoice_to_face()
