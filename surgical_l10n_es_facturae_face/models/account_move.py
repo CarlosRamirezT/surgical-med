@@ -38,6 +38,13 @@ class AccountMove(models.Model):
         for record in self:
             if record.edi_disable_auto:
                 continue
+
+            company = record.company_id
+            
+            # check if customer credit notes should be send to FACe
+            if record.move_type == 'out_refund' and not company.facturae_send_customer_credit_notes_to_face:
+                continue
+            
             partner = record.partner_id
             if record.move_type not in ["out_invoice", "out_refund"]:
                 continue
