@@ -110,10 +110,13 @@ class AccountMoveLine(models.Model):
     def _get_invoice_stock_pickings_from_sale_order(self):
         self.ensure_one()
         self = self.sudo()
+        partner_id = self.move_id.partner_shipping_id or self.move_id.partner_id
         picking_ids = self.env['stock.picking'].sudo().search([
             ('picking_type_code', '=', 'outgoing'),
             ('state', 'in', ('confirmed', 'assigned', 'done')),
             ('origin', '=', self.sale_line_ids.order_id.name),
+            ('partner_id', '=', partner_id.id),
+            ('invoice_ids', '=', False),
         ])
         return picking_ids
     
