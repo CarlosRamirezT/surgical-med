@@ -2,11 +2,12 @@
 # @author: Enric Tobella
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.addons.component.core import Component
+from odoo.addons.l10n_es_facturae_face.components.account_move_l10n_es_facturae_listener import AccountMoveL10nEsFacturaeListener
 
 
-class AccountMoveL10nEsFacturaeListener(Component):
+class AccountMoveL10nEsFacturaeListener(AccountMoveL10nEsFacturaeListener):
     _inherit = "account.move.l10n.es.facturae.listener"
+    _apply_on = ["account.move"]
 
     def on_post_account_move(self, records):
         # use our new method without jobs so the user works faster
@@ -18,7 +19,7 @@ class AccountMoveL10nEsFacturaeListener(Component):
             if record.move_type == 'out_refund' and not company.facturae_send_customer_credit_notes_to_face:
                 continue
 
-            if record.facturae_send_invoice_manually_to_face_on_submit:
+            if company.facturae_send_invoice_manually_to_face_on_submit:
 
                 records.manually_send_invoice_to_face()
 
