@@ -14,6 +14,27 @@ def check_and_fix_configurations(env):
         [("code", "=", "l10n_es_facturae")], limit=1
     )
 
+    # check if backend type has an external id related
+
+    external_id = env["ir.model.data"].search(
+        [
+            # ("module", "=", module),
+            ("name", "=", "facturae_backend_type"),
+            # ("model", "=", "edi.backend.type"),
+        ],
+    )
+    if external_id:
+        external_id.unlink()
+
+    env["ir.model.data"].create(
+        {
+            "module": module,
+            "name": "facturae_backend_type",
+            "model": "edi.backend.type",
+            "res_id": backend_type.id,
+        }
+    )
+
     # facturae_exchange_type
 
     external_id = env["ir.model.data"].search(
@@ -247,7 +268,7 @@ def check_and_fix_configurations(env):
         }
     )
 
-def post_init_hook(cr, registry):
+def post_init_hook(cr, registry=False):
     """
     This function runs automatically after installing/updating the module.
     """
