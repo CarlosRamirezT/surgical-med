@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_surgicalmed_quality_control_surgicalmed_quality_control,surgicalmed_quality_control.surgicalmed_quality_control,model_surgicalmed_quality_control_surgicalmed_quality_control,base.group_user,1,1,1,1
