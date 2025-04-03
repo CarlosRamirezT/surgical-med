@@ -37,7 +37,7 @@ class StockPicking(models.Model):
         for picking in self:
             pending_checks = self.env['quality.check'].search([
                 ('picking_id', '=', picking.id),
-                ('state', '!=', 'validated')  # Cambia 'validated' según el estado que represente validado
+                ('state', '!=', 'pass')
             ])
             if pending_checks:
                 pending_products = '\n'.join(pending_checks.mapped('product_id.display_name'))
