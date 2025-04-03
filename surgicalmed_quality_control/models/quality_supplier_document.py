@@ -32,10 +32,13 @@ class QualitySupplierDocument(models.Model):
 
     name = fields.Char(string="Document Name", required=True)
     partner_id = fields.Many2one(
-        'res.partner',
+        comodel_name='res.partner',
         string="Supplier",
-        required=True,
-        inverse_name='quality_document_ids'
+        readonly=True,
+        index=True,
+        auto_join=True,
+        ondelete="cascade",
+        check_company=True,
     )
     issue_date = fields.Date(string="Issue Date")
     expiration_date = fields.Date(string="Expiration Date")
@@ -58,8 +61,8 @@ class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     quality_document_ids = fields.One2many(
-        'quality.supplier.document',
-        'partner_id',
+        comodel_name='quality.supplier.document',
+        inverse_name='partner_id',
         string="Quality Documents"
     )
     document_template_id = fields.Many2one(
