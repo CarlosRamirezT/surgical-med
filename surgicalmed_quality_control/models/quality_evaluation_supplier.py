@@ -100,13 +100,11 @@ class QualityEvaluationSupplierTemplateCriteria(models.Model):
     evaluation_id = fields.Many2one(
         'quality.evaluation.supplier',
         string='Supplier Evaluation',
-        required=True,
         ondelete='cascade'
     )
     template_id = fields.Many2one(
         'quality.evaluation.supplier.template',
         string='Evaluation Template',
-        required=True,
         ondelete='cascade'
     )
     criteria_id = fields.Many2one(
