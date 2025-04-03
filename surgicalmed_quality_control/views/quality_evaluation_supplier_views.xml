@@ -1,0 +1,77 @@
+<odoo>
+    
+    <menuitem id="menu_quality_control_suppliers" 
+              name="Suppliers" 
+              parent="quality_control.menu_quality_root" 
+              sequence="20"/>
+    
+    <menuitem id="menu_quality_control_supplier_evaluation" 
+              name="Supplier Evaluation" 
+              parent="menu_quality_control_suppliers" 
+              action="action_quality_evaluation_supplier" 
+              sequence="30"/>
+
+    <record id="view_quality_evaluation_supplier_tree" model="ir.ui.view">
+        <field name="name">quality.evaluation.supplier.tree</field>
+        <field name="model">quality.evaluation.supplier</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="supplier_id"/>
+                <field name="template_id"/>
+                <field name="evaluation_date"/>
+                <field name="total_score"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_quality_evaluation_supplier_form" model="ir.ui.view">
+        <field name="name">quality.evaluation.supplier.form</field>
+        <field name="model">quality.evaluation.supplier</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="supplier_id"/>
+                        <field name="template_id"/>
+                        <field name="evaluation_date"/>
+                        <field name="state" readonly="1"/>
+                    </group>
+                    <notebook>
+                        <page string="Evaluation Lines">
+                            <field name="line_ids">
+                                <tree editable="bottom">
+                                    <field name="criteria_id"/>
+                                    <field name="weight"/>
+                                    <field name="evaluation"/>
+                                    <field name="score" readonly="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    <group>
+                        <field name="total_score" readonly="1"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_start" type="object" string="Start" states="draft" class="btn-primary"/>
+                    <button name="action_done" type="object" string="Mark as Done" states="in_progress" class="btn-success"/>
+                    <button name="action_cancel" type="object" string="Cancel" states="draft,in_progress" class="btn-secondary"/>
+                    <button name="action_reset_to_draft" type="object" string="Reset to Draft" states="done,cancelled" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_quality_evaluation_supplier" model="ir.actions.act_window">
+        <field name="name">Supplier Evaluation</field>
+        <field name="res_model">quality.evaluation.supplier</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Supplier Evaluation
+            </p>
+        </field>
+    </record>
+
+</odoo>

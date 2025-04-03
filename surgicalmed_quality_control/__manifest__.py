@@ -12,5 +12,6 @@
         "views/quality_alert_views.xml",
         "views/quality_evaluation_supplier_criteria_views.xml",
         "views/quality_evaluation_supplier_template.xml",
+        "views/quality_evaluation_supplier_views.xml",
     ],
 }
