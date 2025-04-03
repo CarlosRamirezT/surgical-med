@@ -1,0 +1,28 @@
+<odoo>
+    <record id="view_res_config_settings_quality_control" model="ir.ui.view">
+        <field name="name">res.config.settings.quality.control</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.view_res_config_settings"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='settings']" position="inside">
+                <div class="settings">
+                    <h2>Quality Control Settings</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <field name="quality_alert_team_id" widget="many2one"/>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <field name="quality_point_test_type_id" widget="many2one"/>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <menuitem id="menu_quality_control_settings" 
+              name="Quality Control Settings" 
+              parent="base.menu_administration_settings" 
+              action="action_open_quality_control_settings" 
+              sequence="10"/>
+</odoo>

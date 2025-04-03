@@ -10,6 +10,7 @@
     "data": [
         "security/ir.model.access.csv",
 
+        "views/res_config_settings.xml",
         "views/quality_alert_views.xml",
         "views/quality_evaluation_supplier_criteria_views.xml",
         "views/quality_evaluation_supplier_template.xml",
