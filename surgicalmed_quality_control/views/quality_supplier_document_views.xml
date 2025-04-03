@@ -1,0 +1,41 @@
+<odoo>
+    <data>
+        <!-- Inherit the supplier form view to add the Quality tab -->
+        <record id="view_partner_form_inherit_quality" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit.quality</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Quality">
+                        <group>
+                            <field name="document_template_id" widget="many2one"/>
+                            <field name="quality_document_ids" widget="one2many_list">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="issue_date"/>
+                                    <field name="expiration_date"/>
+                                    <field name="validity_days"/>
+                                    <field name="document_file" widget="binary"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="issue_date"/>
+                                        <field name="expiration_date"/>
+                                        <field name="validity_days"/>
+                                        <field name="document_file" widget="binary"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                        <footer>
+                            <button name="action_update_expired_documents" type="object" string="Update Expired Documents" class="btn-primary"/>
+                        </footer>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+    </data>
+</odoo>

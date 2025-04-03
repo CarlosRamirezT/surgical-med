@@ -14,5 +14,6 @@
         "views/quality_evaluation_supplier_template.xml",
         "views/quality_evaluation_supplier_views.xml",
         "views/quality_supplier_document_template_views.xml",
+        "views/quality_supplier_document_views.xml",
     ],
 }
