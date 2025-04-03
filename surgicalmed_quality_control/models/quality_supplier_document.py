@@ -31,6 +31,11 @@ class QualitySupplierDocument(models.Model):
     _description = 'Quality Supplier Document'
 
     name = fields.Char(string="Document Name", required=True)
+    partner_id = fields.Many2one(
+        'res.partner',
+        string="Supplier",
+        required=True
+    )
     issue_date = fields.Date(string="Issue Date")
     expiration_date = fields.Date(string="Expiration Date")
     validity_days = fields.Integer(string="Validity Days")
