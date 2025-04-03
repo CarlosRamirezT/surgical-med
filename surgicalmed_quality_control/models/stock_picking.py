@@ -23,11 +23,15 @@ class StockPicking(models.Model):
     def _create_quality_checks(self, picking):
         if picking.picking_type_id.code in ['incoming', 'internal']:
             for move in picking.move_ids:
+                company = self.env.company
+                team_id = company.quality_alert_team_id.id
+                test_type_id = company.quality_point_test_type_id.id
+
                 quality_check = self.env['quality.check'].create({
                     'picking_id': picking.id,
                     'product_id': move.product_id.id,
-                    'team_id': self.env['quality.alert.team'].search([], limit=1).id,
-                    'test_type_id': self.env['quality.point.test_type'].search([], limit=1).id,
+                    'team_id': team_id,
+                    'test_type_id': test_type_id,
                     # 'product_qty': move.product_uom_qty,
                     # 'state': 'pending',
                 })
