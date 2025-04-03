@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import models, fields, api
 
 
 class QualityAlert(models.Model):
@@ -86,6 +86,7 @@ class QualityAlert(models.Model):
             ("low", "Low"),
             ("medium", "Medium"),
             ("high", "High"),
+            ("none", "N/A"),
         ],
         string="Risk Level",
         help="Risk level of the alert.",
@@ -93,6 +94,7 @@ class QualityAlert(models.Model):
         store=True,
     )
 
+    @api.depends("risk_probability", "risk_severity")
     def _compute_risk_level(self):
         risk_probability_value = {
             "low": 1,
@@ -116,6 +118,6 @@ class QualityAlert(models.Model):
                 elif 6 <= risk_level_value <= 9:
                     record.risk_level = "high"
             else:
-                record.risk_level = False
+                record.risk_level = "none"
 
 
