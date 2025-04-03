@@ -79,7 +79,7 @@ class QualityEvaluationSupplierTemplate(models.Model):
     name = fields.Char(string='Evaluation Matrix', required=True)
     line_ids = fields.One2many(
         'quality.evaluation.supplier.template.line',
-        'evaluation_id',
+        'template_id',
         string='Criteria'
     )
     active = fields.Boolean(string='Active', default=True)
@@ -97,7 +97,7 @@ class QualityEvaluationSupplierTemplateCriteria(models.Model):
     _name = 'quality.evaluation.supplier.template.line'
     _description = 'Quality Evaluation Supplier Template Line'
 
-    evaluation_id = fields.Many2one(
+    template_id = fields.Many2one(
         'quality.evaluation.supplier.template',
         string='Evaluation Matrix',
         required=True,
