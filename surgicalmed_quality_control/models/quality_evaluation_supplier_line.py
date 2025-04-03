@@ -51,3 +51,4 @@ class QualityEvaluationSupplierTemplateCriteria(models.Model):
     description = fields.Text(string='Description')
     evaluation_method = fields.Text(string='How to Evaluate')
     weight = fields.Float(string='Weight (%)', required=True)
+    active = fields.Boolean(string='Active', default=True)
