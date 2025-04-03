@@ -9,19 +9,19 @@ class ResPartner(models.Model):
         inverse_name='partner_id',
         string="Quality Documents"
     )
-    document_template_id = fields.Many2one(
-        comodel_name='quality.supplier.document.template',
-        string="Document Template"
-    )
+    # document_template_id = fields.Many2one(
+    #     comodel_name='quality.supplier.document.template',
+    #     string="Document Template"
+    # )
 
-    @api.onchange('document_template_id')
-    def _onchange_document_template_id(self):
-        if self.document_template_id:
-            self.quality_document_ids = [(5, 0, 0)]  # Clear existing lines
-            for line in self.document_template_id.document_line_ids:
-                self.quality_document_ids = [(0, 0, {
-                    'name': line.name,
-                })]
+    # @api.onchange('document_template_id')
+    # def _onchange_document_template_id(self):
+    #     if self.document_template_id:
+    #         self.quality_document_ids = [(5, 0, 0)]  # Clear existing lines
+    #         for line in self.document_template_id.document_line_ids:
+    #             self.quality_document_ids = [(0, 0, {
+    #                 'name': line.name,
+    #             })]
 
     @api.onchange('quality_document_ids')
     def _onchange_quality_document_ids(self):
