@@ -27,6 +27,7 @@ class StockPicking(models.Model):
                     'picking_id': picking.id,
                     'product_id': move.product_id.id,
                     'team_id': self.env['quality.alert.team'].search([], limit=1).id,
+                    'test_type_id': self.env['quality.point.test_type'].search([], limit=1).id,
                     # 'product_qty': move.product_uom_qty,
                     # 'state': 'pending',
                 })
