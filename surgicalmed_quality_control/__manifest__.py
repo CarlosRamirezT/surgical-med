@@ -7,5 +7,7 @@
     "category": "Manufacturing/Quality",
     "version": "17.0.0.1",
     "depends": ["quality_control"],
-    "data": [],
+    "data": [
+        "security/ir.model.access.csv",
+    ],
 }

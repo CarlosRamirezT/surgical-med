@@ -3,3 +3,5 @@ access_quality_alert_type_user,quality.alert.type.user,model_quality_alert_type,
 access_quality_alert_type_manager,quality.alert.type.manager,model_quality_alert_type,quality.group_quality_manager,1,1,1,1
 access_quality_action_user,quality.action.user,model_quality_action,quality.group_quality_user,1,0,0,0
 access_quality_action_manager,quality.action.manager,model_quality_action,quality.group_quality_manager,1,1,1,1
+access_quality_control_user,quality.control.user,model_quality_control,quality.group_quality_user,1,0,0,0
+access_quality_control_manager,quality.control.manager,model_quality_control,quality.group_quality_manager,1,1,1,1
