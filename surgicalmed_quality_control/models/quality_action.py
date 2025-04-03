@@ -36,3 +36,17 @@ class QualityAction(models.Model):
     date_closed = fields.Datetime(string='Closed On')
     user_validated_id = fields.Many2one('res.users', string='Validated By')
     date_validated = fields.Datetime(string='Validated On')
+
+    def action_notify_user(self):
+        """Open a wizard to notify the assigned user."""
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Notify User',
+            'view_mode': 'form',
+            'res_model': 'quality.action.notify.wizard',
+            'target': 'new',
+            'context': {
+                'default_quality_action_id': self.id,
+                'default_user_assigned_id': self.user_assigned_id.id,
+            },
+        }
