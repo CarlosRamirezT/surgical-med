@@ -1,0 +1,27 @@
+<odoo>
+    <record id="view_quality_action_notify_wizard_form" model="ir.ui.view">
+        <field name="name">quality.action.notify.wizard.form</field>
+        <field name="model">quality.action.notify.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Quality Action Notification">
+                <group>
+                    <field name="quality_action_id" readonly="1"/>
+                    <field name="user_assigned_id" readonly="1"/>
+                    <field name="message" placeholder="Enter your message here..."/>
+                </group>
+                <footer>
+                    <button string="Send Notification" type="object" name="action_send_notification" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_quality_action_notify_wizard" model="ir.actions.act_window">
+        <field name="name">Quality Action Notification</field>
+        <field name="res_model">quality.action.notify.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    
+</odoo>
