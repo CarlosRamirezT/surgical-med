@@ -21,7 +21,7 @@
                     <notebook>
                         <page string="Document Lines">
                             <field name="document_line_ids">
-                                <tree string="Document Lines">
+                                <tree string="Document Lines" editable="bottom">
                                     <field name="name"/>
                                     <field name="description"/>
                                 </tree>
