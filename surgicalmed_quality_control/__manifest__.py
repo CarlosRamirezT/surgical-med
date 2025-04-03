@@ -9,5 +9,6 @@
     "depends": ["quality_control"],
     "data": [
         "security/ir.model.access.csv",
+        "views/quality_alert_views.xml",
     ],
 }
