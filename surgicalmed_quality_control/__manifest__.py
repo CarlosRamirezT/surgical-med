@@ -11,5 +11,6 @@
         "security/ir.model.access.csv",
         "views/quality_alert_views.xml",
         "views/quality_evaluation_supplier_criteria_views.xml",
+        "views/quality_evaluation_supplier_template.xml",
     ],
 }
