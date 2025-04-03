@@ -1,16 +1,5 @@
 <odoo>
     
-    <menuitem id="menu_quality_control_suppliers" 
-              name="Suppliers" 
-              parent="quality_control.menu_quality_root" 
-              sequence="20"/>
-    
-    <menuitem id="menu_quality_control_supplier_evaluation" 
-              name="Supplier Evaluation" 
-              parent="menu_quality_control_suppliers" 
-              action="action_quality_evaluation_supplier" 
-              sequence="30"/>
-
     <record id="view_quality_evaluation_supplier_tree" model="ir.ui.view">
         <field name="name">quality.evaluation.supplier.tree</field>
         <field name="model">quality.evaluation.supplier</field>
@@ -73,5 +62,16 @@
             </p>
         </field>
     </record>
+
+    <menuitem id="menu_quality_control_suppliers" 
+            name="Suppliers" 
+            parent="quality_control.menu_quality_root" 
+            sequence="20"/>
+    
+    <menuitem id="menu_quality_control_supplier_evaluation" 
+              name="Supplier Evaluation" 
+              parent="menu_quality_control_suppliers" 
+              action="action_quality_evaluation_supplier" 
+              sequence="30"/>
 
 </odoo>
