@@ -97,9 +97,15 @@ class QualityEvaluationSupplierTemplateCriteria(models.Model):
     _name = 'quality.evaluation.supplier.template.line'
     _description = 'Quality Evaluation Supplier Template Line'
 
+    evaluation_id = fields.Many2one(
+        'quality.evaluation.supplier',
+        string='Supplier Evaluation',
+        required=True,
+        ondelete='cascade'
+    )
     template_id = fields.Many2one(
         'quality.evaluation.supplier.template',
-        string='Evaluation Matrix',
+        string='Evaluation Template',
         required=True,
         ondelete='cascade'
     )
