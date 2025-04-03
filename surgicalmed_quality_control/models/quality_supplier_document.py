@@ -7,8 +7,8 @@ class QualitySupplierDocumentTemplate(models.Model):
 
     name = fields.Char(string="Template Name", required=True)
     document_line_ids = fields.One2many(
-        'quality.supplier.document.template.line',
-        'template_id',
+        comodel_name='quality.supplier.document.template.line',
+        inverse_name='template_id',
         string="Document Lines"
     )
 
@@ -18,9 +18,13 @@ class QualitySupplierDocumentTemplateLine(models.Model):
     _description = 'Quality Supplier Document Template Line'
 
     template_id = fields.Many2one(
-        'quality.supplier.document.template',
+        comodel_name='quality.supplier.document.template',
         string="Template",
-        required=True
+        readonly=True,
+        index=True,
+        auto_join=True,
+        ondelete="cascade",
+        check_company=True,
     )
     name = fields.Char(string="Document Name", required=True)
     description = fields.Text(string="Description")
@@ -38,7 +42,6 @@ class QualitySupplierDocument(models.Model):
         index=True,
         auto_join=True,
         ondelete="cascade",
-        check_company=True,
     )
     issue_date = fields.Date(string="Issue Date")
     expiration_date = fields.Date(string="Expiration Date")
