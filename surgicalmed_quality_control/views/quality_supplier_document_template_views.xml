@@ -44,10 +44,6 @@
         </field>
     </record>
 
-    <menuitem id="menu_quality_supplier_document_template_config" 
-              name="Quality Supplier Document Templates" 
-              parent="base.menu_config" 
-              action="action_quality_supplier_document_template"/>
 
     <record id="action_quality_supplier_document_template" model="ir.actions.act_window">
         <field name="name">Quality Supplier Document Templates</field>
@@ -55,6 +51,10 @@
         <field name="view_mode">tree,form</field>
     </record>
 
+    <menuitem id="menu_quality_supplier_document_template_config" 
+              name="Quality Supplier Document Templates" 
+              parent="base.menu_config" 
+              action="action_quality_supplier_document_template"/>
 
     <!-- Menu Item -->
     <menuitem id="menu_quality_supplier_document_template"
