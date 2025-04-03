@@ -7,6 +7,7 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="name"/>
+                <field name="helpdesk_ticket_id"/>
                 <field name="description"/>
             </tree>
         </field>
@@ -21,6 +22,7 @@
                 <sheet>
                     <group>
                         <field name="name"/>
+                        <field name="helpdesk_ticket_id"/>
                         <field name="description"/>
                     </group>
                 </sheet>

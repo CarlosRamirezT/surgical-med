@@ -40,6 +40,11 @@ class QualityAlert(models.Model):
         string="Alert Type",
         help="Type of the quality alert.",
     )
+    helpdesk_ticket_id = fields.Many2one(
+        "helpdesk.ticket",
+        string="Helpdesk Ticket",
+        help="Related helpdesk ticket for this quality alert.",
+    )
 
     # risk classification fields
     
