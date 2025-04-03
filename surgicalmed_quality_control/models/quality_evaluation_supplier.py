@@ -77,11 +77,11 @@ class QualityEvaluationSupplierTemplate(models.Model):
     _description = 'Quality Evaluation Supplier Template'
 
     name = fields.Char(string='Evaluation Matrix', required=True)
-    # line_ids = fields.One2many(
-    #     'quality.evaluation.supplier.template.line',
-    #     'template_id',
-    #     string='Criteria'
-    # )
+    line_ids = fields.One2many(
+        'quality.evaluation.supplier.template.line',
+        'template_id',
+        string='Criteria'
+    )
     active = fields.Boolean(string='Active', default=True)
 
     def action_activate(self):
