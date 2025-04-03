@@ -26,7 +26,7 @@ class StockPicking(models.Model):
                 quality_check = self.env['quality.check'].create({
                     'picking_id': picking.id,
                     'product_id': move.product_id.id,
-                    'team_id': self.env['quality.team'].search([], limit=1).id,
+                    'team_id': self.env['quality.alert.team'].search([], limit=1).id,
                     # 'product_qty': move.product_uom_qty,
                     # 'state': 'pending',
                 })
