@@ -22,7 +22,7 @@ class StockPicking(models.Model):
     
     def _create_quality_checks(self, picking):
         if picking.picking_type_id.code in ['incoming', 'internal']:
-            for move in picking.move_lines:
+            for move in picking.move_ids:
                 quality_check = self.env['quality.check'].create({
                     'picking_id': picking.id,
                     'product_id': move.product_id.id,
