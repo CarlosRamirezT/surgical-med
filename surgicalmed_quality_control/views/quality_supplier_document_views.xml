@@ -9,7 +9,7 @@
                 <notebook position="inside">
                     <page string="Quality">
                         <group>
-                            <field name="document_template_id" widget="many2one"/>
+                            <!-- <field name="document_template_id" widget="many2one"/> -->
                             <field name="quality_document_ids" widget="one2many_list">
                                 <tree editable="bottom">
                                     <field name="name"/>
