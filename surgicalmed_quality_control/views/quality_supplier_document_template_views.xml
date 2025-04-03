@@ -1,0 +1,67 @@
+<odoo>
+    <record id="view_quality_supplier_document_template_tree" model="ir.ui.view">
+        <field name="name">quality.supplier.document.template.tree</field>
+        <field name="model">quality.supplier.document.template</field>
+        <field name="arch" type="xml">
+            <tree string="Quality Supplier Document Templates">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_quality_supplier_document_template_form" model="ir.ui.view">
+        <field name="name">quality.supplier.document.template.form</field>
+        <field name="model">quality.supplier.document.template</field>
+        <field name="arch" type="xml">
+            <form string="Quality Supplier Document Template">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <notebook>
+                        <page string="Document Lines">
+                            <field name="document_line_ids">
+                                <tree string="Document Lines">
+                                    <field name="name"/>
+                                    <field name="description"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_quality_supplier_document_template_line_tree" model="ir.ui.view">
+        <field name="name">quality.supplier.document.template.line.tree</field>
+        <field name="model">quality.supplier.document.template.line</field>
+        <field name="arch" type="xml">
+            <tree string="Quality Supplier Document Template Lines">
+                <field name="name"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <menuitem id="menu_quality_supplier_document_template_config" 
+              name="Quality Supplier Document Templates" 
+              parent="base.menu_config" 
+              action="action_quality_supplier_document_template"/>
+
+    <record id="action_quality_supplier_document_template" model="ir.actions.act_window">
+        <field name="name">Quality Supplier Document Templates</field>
+        <field name="res_model">quality.supplier.document.template</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- Menu Item -->
+    <menuitem id="menu_quality_supplier_document_template"
+              name="Supplier Document Templates"
+              parent="quality_control.menu_quality_configuration"
+              action="action_quality_supplier_document_template"
+              sequence="30"
+              groups="quality.group_quality_manager"/>
+    
+</odoo>
