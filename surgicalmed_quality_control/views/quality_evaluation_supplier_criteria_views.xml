@@ -18,30 +18,12 @@
             <field name="name">quality.evaluation.supplier.criteria.tree</field>
             <field name="model">quality.evaluation.supplier.criteria</field>
             <field name="arch" type="xml">
-                <tree>
+                <tree editable="bottom">
                     <field name="name"/>
                     <field name="description"/>
                     <field name="weight"/>
                     <field name="active"/>
                 </tree>
-            </field>
-        </record>
-
-        <!-- Form view for quality.evaluation.supplier.criteria -->
-        <record id="view_quality_evaluation_supplier_criteria_form" model="ir.ui.view">
-            <field name="name">quality.evaluation.supplier.criteria.form</field>
-            <field name="model">quality.evaluation.supplier.criteria</field>
-            <field name="arch" type="xml">
-                <form>
-                    <sheet>
-                        <group>
-                            <field name="name"/>
-                            <field name="description"/>
-                            <field name="weight"/>
-                            <field name="active"/>
-                        </group>
-                    </sheet>
-                </form>
             </field>
         </record>
 
