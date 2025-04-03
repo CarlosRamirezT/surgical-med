@@ -17,11 +17,11 @@ class QualityEvaluationSupplier(models.Model):
     )
     evaluation_date = fields.Date(string='Evaluation Date', default=fields.Date.context_today, required=True)
     total_score = fields.Float(string='Total Score', compute='_compute_total_score', store=True)
-    line_ids = fields.One2many(
-        'quality.evaluation.supplier.line',
-        'evaluation_id',
-        string='Evaluation Lines'
-    )
+    # line_ids = fields.One2many(
+    #     'quality.evaluation.supplier.line',
+    #     'evaluation_id',
+    #     string='Evaluation Lines'
+    # )
     state = fields.Selection(
         [
             ('draft', 'Draft'),
@@ -77,11 +77,11 @@ class QualityEvaluationSupplierTemplate(models.Model):
     _description = 'Quality Evaluation Supplier Template'
 
     name = fields.Char(string='Evaluation Matrix', required=True)
-    line_ids = fields.One2many(
-        'quality.evaluation.supplier.template.line',
-        'template_id',
-        string='Criteria'
-    )
+    # line_ids = fields.One2many(
+    #     'quality.evaluation.supplier.template.line',
+    #     'template_id',
+    #     string='Criteria'
+    # )
     active = fields.Boolean(string='Active', default=True)
 
     def action_activate(self):
