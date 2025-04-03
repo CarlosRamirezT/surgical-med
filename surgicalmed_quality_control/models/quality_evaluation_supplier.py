@@ -17,11 +17,11 @@ class QualityEvaluationSupplier(models.Model):
     )
     evaluation_date = fields.Date(string='Evaluation Date', default=fields.Date.context_today, required=True)
     total_score = fields.Float(string='Total Score', compute='_compute_total_score', store=True)
-    # line_ids = fields.One2many(
-    #     'quality.evaluation.supplier.line',
-    #     'evaluation_id',
-    #     string='Evaluation Lines'
-    # )
+    line_ids = fields.One2many(
+        'quality.evaluation.supplier.line',
+        'evaluation_id',
+        string='Evaluation Lines'
+    )
     state = fields.Selection(
         [
             ('draft', 'Draft'),

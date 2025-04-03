@@ -5,15 +5,20 @@ class QualityEvaluationSupplierTemplateCriteria(models.Model):
     _description = 'Quality Evaluation Supplier Template Line'
 
     evaluation_id = fields.Many2one(
-        'quality.evaluation.supplier',
+        comodel_name='quality.evaluation.supplier',
         string='Supplier Evaluation',
-        ondelete='cascade'
+        required=True,
+        readonly=True,
+        index=True,
+        auto_join=True,
+        ondelete="cascade",
+        check_company=True,
     )
-    template_id = fields.Many2one(
-        'quality.evaluation.supplier.template',
-        string='Evaluation Template',
-        ondelete='cascade'
-    )
+    # template_id = fields.Many2one(
+    #     'quality.evaluation.supplier.template',
+    #     string='Evaluation Template',
+    #     ondelete='cascade'
+    # )
     criteria_id = fields.Many2one(
         'quality.evaluation.supplier.criteria',
         string='Criteria',
