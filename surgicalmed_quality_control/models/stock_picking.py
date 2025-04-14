@@ -33,7 +33,7 @@ class StockPicking(models.Model):
                 ]
             )
             for quality_point in quality_points:
-                for move in picking.move_lines:
+                for move in picking.move_ids_without_package:
                     if move.product_id in quality_point.product_ids or not quality_point.product_ids:
                         for lot in move.lot_ids:
                             # create quality check for each lot/serial
