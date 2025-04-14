@@ -20,5 +20,7 @@
         "views/helpdesk_ticket_views.xml",
         
         "wizards/quality_action_notify_wizard_views.xml",
+
+        "reports/quality_alert_report.xml",
     ],
 }

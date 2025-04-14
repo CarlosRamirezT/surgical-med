@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_quality_alert_document">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <div class="oe_structure">
+                    <table>
+                        <tr>
+                            <td colspan="2" class="text-left">
+                                <img t-att-src="'/web/image/res.company/%d/logo' % (res_company.id,)" alt="Company Logo" style="max-height: 50px;" />
+                            </td>
+                            <td colspan="2" class="text-center">
+                                <h2>ACCIONES CORRECTIVAS</h2>
+                            </td>
+                            <td colspan="2" class="text-center">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" class="text-right">
+                                <strong>Fecha:</strong>
+                            </td>
+                            <td colspan="1" class="text-center">
+                            </td>
+                            <td colspan="1" class="text-right">
+                                <strong>Notificado:</strong>
+                            </td>
+                            <td colspan="1" class="text-center">
+                            </td>
+                            <td colspan="1" class="text-right">
+                                <strong>No.:</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" class="text-center">
+                                <strong>Producto:</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" class="text-center">
+                                <strong>Referencia:</strong>
+                            </td>
+                            <td colspan="4" class="text-center">
+                                <strong>Descripción:</strong>
+                            </td>
+                            <td colspan="1" class="text-center">
+                                <strong>Lote:</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" class="text-left">
+                            </td>
+                            <td colspan="4" class="text-left">
+                            </td>
+                            <td colspan="1" class="text-left">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="text-center">
+                                <strong>Descripción de la No Conformidad</strong>
+                            </td>
+                            <td colspan="2" class="text-center">
+                                <strong>Peligro Identificado</strong>
+                            </td>
+                            <td colspan="2" class="text-center">
+                                <strong>Impacto Potencial</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="text-left">
+                            </td>
+                            <td colspan="2" class="text-left">
+                            </td>
+                            <td colspan="2" class="text-left">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" class="text-center">
+                                <strong>Clasficación de la No Conformidad</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" class="text-center">
+                                <strong>Calificación:</strong>
+                            </td>
+                            <td colspan="4" class="text-center">
+                                <strong>Criterios:</strong>
+                            </td>
+                            <td colspan="1" class="text-center">
+                                <strong>Selección:</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" class="text-left">
+                                <span>Menor</span>
+                            </td>
+                            <td colspan="4" class="text-left">
+                                <span>No afecta la seguridad ni el desempeño.</span>
+                            </td>
+                            <td colspan="1" class="text-center">
+                                <t t-if="doc.risk_classification == 'minor'">
+                                    <span>[X]</span>
+                                </t>
+                                <t t-else="">
+                                    <span>[ ]</span>
+                                </t>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" class="text-left">
+                                <span>Mayor</span>
+                            </td>
+                            <td colspan="4" class="text-left">
+                                <span>Puede afectar la seguridad, el desempeño o el cumplimiento normativo.</span>
+                            </td>
+                            <td colspan="1" class="text-center">
+                                <t t-if="doc.risk_classification == 'major'">
+                                    <span>[X]</span>
+                                </t>
+                                <t t-else="">
+                                    <span>[ ]</span>
+                                </t>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" class="text-left">
+                                <span>Critico</span>
+                            </td>
+                            <td colspan="4" class="text-left">
+                                <span>Representa un incidente grave, requiere notificación a las autoridades.</span>
+                            </td>
+                            <td colspan="1" class="text-center">
+                                <t t-if="doc.risk_classification == 'critical'">
+                                    <span>[X]</span>
+                                </t>
+                                <t t-else="">
+                                    <span>[ ]</span>
+                                </t>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" class="text-center">
+                                <strong>Evaluación de Riesgos</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" rowspan="5" class="text-center">
+                                <strong>Probabilidad</strong>
+                            </td>
+                            <td colspan="5" rowspan="1" class="text-center">
+                                <strong>Severidad</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td colspan="1" class="text-center">
+                                <strong>Leve (1)</strong>
+                            </td>
+                            <td colspan="1" class="text-center">
+                                <strong>Moderada (2)</strong>
+                            </td>
+                            <td colspan="1" class="text-center">
+                                <strong>Grave (3)</strong>
+                            </td>
+                            <td colspan="1" class="text-center">
+                                <strong>Nivel de Riesgo (PxS)</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" class="text-center">
+                                <strong>Baja (1)</strong>
+                            </td>
+                            <td colspan="1" class="text-center" style="background-color: #d4eecb;">
+                                <t t-if="doc.risk_probability == 'low' and doc.risk_severity == 'low'">
+                                    <span>[X]</span>
+                                </t>
+                                <t t-else="">
+                                    <span>[ ]</span>
+                                </t>
+                            </td>
+                            <td colspan="1" class="text-center" style="background-color: #d4eecb;">
+                                <t t-if="doc.risk_probability == 'low' and doc.risk_severity == 'medium'">
+                                    <span>[X]</span>
+                                </t>
+                                <t t-else="">
+                                    <span>[ ]</span>
+                                </t>
+                            </td>
+                            <td colspan="1" class="text-center" style="background-color: #f8d7da;">
+                                <t t-if="doc.risk_probability == 'low' and doc.risk_severity == 'high'">
+                                    <span>[X]</span>
+                                </t>
+                                <t t-else="">
+                                    <span>[ ]</span>
+                                </t>
+                            </td>
+                            <td colspan="1" class="text-center">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" class="text-center">
+                                <strong>Media (2)</strong>
+                            </td>
+                            <td colspan="1" class="text-center" style="background-color: #d4eecb;">
+                                <t t-if="doc.risk_probability == 'medium' and doc.risk_severity == 'low'">
+                                    <span>[X]</span>
+                                </t>
+                                <t t-else="">
+                                    <span>[ ]</span>
+                                </t>
+                            </td>
+                            <td colspan="1" class="text-center" style="background-color: #ffeeba;">
+                                <t t-if="doc.risk_probability == 'medium' and doc.risk_severity == 'medium'">
+                                    <span>[X]</span>
+                                </t>
+                                <t t-else="">
+                                    <span>[ ]</span>
+                                </t>
+                            </td>
+                            <td colspan="1" class="text-center" style="background-color: #f8d7da;">
+                                <t t-if="doc.risk_probability == 'medium' and doc.risk_severity == 'high'">
+                                    <span>[X]</span>
+                                </t>
+                                <t t-else="">
+                                    <span>[ ]</span>
+                                </t>
+                            </td>
+                            <td colspan="1" rowspan="2" class="text-center">
+                                <p>
+                                    Bajo (1-2)
+                                    Medio (3-4)
+                                    Alto (6-9)
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" class="text-center">
+                                <strong>Alta (3)</strong>
+                            </td>
+                            <td colspan="1" class="text-center" style="background-color: #f8d7da;">
+                                <t t-if="doc.risk_probability == 'high' and doc.risk_severity == 'low'">
+                                    <span>[X]</span>
+                                </t>
+                                <t t-else="">
+                                    <span>[ ]</span>
+                                </t>
+                            </td>
+                            <td colspan="1" class="text-center" style="background-color: #f8d7da;">
+                                <t t-if="doc.risk_probability == 'high' and doc.risk_severity == 'medium'">
+                                    <span>[X]</span>
+                                </t>
+                                <t t-else="">
+                                    <span>[ ]</span>
+                                </t>
+                            </td>
+                            <td colspan="1" class="text-center" style="background-color: #f5c6cb;">
+                                <t t-if="doc.risk_probability == 'high' and doc.risk_severity == 'high'">
+                                    <span>[X]</span>
+                                </t>
+                                <t t-else="">
+                                    <span>[ ]</span>
+                                </t>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" class="text-center">
+                                <strong>Acción (es) de mejora (s)</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" class="text-center">
+                                <strong>No.</strong>
+                            </td>
+                            <td colspan="1" class="text-center">
+                                <strong>Acción</strong>
+                            </td>
+                            <td colspan="1" class="text-center">
+                                <strong>Responsable</strong>
+                            </td>
+                            <td colspan="1" class="text-center">
+                                <strong>Plazo (días hábiles)</strong>
+                            </td>
+                            <td colspan="1" class="text-center">
+                                <strong>Estado</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" class="text-center">
+                            </td>
+                            <td colspan="1" class="text-center">
+                            </td>
+                            <td colspan="1" class="text-center">
+                            </td>
+                            <td colspan="1" class="text-center">
+                            </td>
+                            <td colspan="1" class="text-center">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" class="text-center">
+                            </td>
+                            <td colspan="1" class="text-center">
+                            </td>
+                            <td colspan="1" class="text-center">
+                            </td>
+                            <td colspan="1" class="text-center">
+                            </td>
+                            <td colspan="1" class="text-center">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" class="text-center">
+                            </td>
+                            <td colspan="1" class="text-center">
+                            </td>
+                            <td colspan="1" class="text-center">
+                            </td>
+                            <td colspan="1" class="text-center">
+                            </td>
+                            <td colspan="1" class="text-center">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" class="text-center">
+                            </td>
+                            <td colspan="1" class="text-center">
+                            </td>
+                            <td colspan="1" class="text-center">
+                            </td>
+                            <td colspan="1" class="text-center">
+                            </td>
+                            <td colspan="1" class="text-center">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" class="text-center">
+                            </td>
+                            <td colspan="1" class="text-center">
+                            </td>
+                            <td colspan="1" class="text-center">
+                            </td>
+                            <td colspan="1" class="text-center">
+                            </td>
+                            <td colspan="1" class="text-center">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" class="text-center">
+                                <strong>Cerrado por:</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-center">
+                                <strong>Nombre y Apellido</strong>
+                            </td>
+                            <td colspan="2" class="text-center">
+                                <strong>Firma</strong>
+                            </td>
+                            <td colspan="1" class="text-center">
+                                <strong>Fecha</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" class="text-center">
+                                <strong>Revisado por:</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-center">
+                                <strong>Nombre y Apellido</strong>
+                            </td>
+                            <td colspan="2" class="text-center">
+                                <strong>Firma</strong>
+                            </td>
+                            <td colspan="1" class="text-center">
+                                <strong>Fecha</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" class="text-left">
+                                <span>Vigencia:</span>
+                            </td>
+                            <td colspan="1" class="text-left">
+                            </td>
+                            <td colspan="1" class="text-left">
+                                <span>Fecha de Rev:</span>
+                            </td>
+                            <td colspan="1" class="text-left">
+                            </td>
+                            <td colspan="1" class="text-left">
+                                <span>No. Rev:</span>
+                            </td>
+                            <td colspan="1" class="text-right">
+                                <span>F: SU-PSG-04/1</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <record id="action_report_picking" model="ir.actions.report">
+        <field name="name">Acciones Correctivas</field>
+        <field name="model">quality.alert</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">surgicalmed_quality_control.report_quality_alert_document</field>
+        <field name="report_file">surgicalmed_quality_control.report_quality_alert_document</field>
+        <field name="print_report_name">'Acciones Ocrrectivas - %s' % object.name</field>
+        <field name="binding_model_id" ref="quality.model_quality_alert"/>
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>
