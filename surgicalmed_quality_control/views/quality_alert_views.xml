@@ -42,6 +42,7 @@
                             options="{'clickable': '1', 'fold_field': 'folded'}" />
                     </header>
                     <sheet>
+                        <field name="can_edit_admin_fields" invisible="1"/>
                         <field name="company_id" invisible="1" />
                         <field name="product_id" invisible="1" />
                         <div class="oe_button_box" name="button_box">
@@ -76,6 +77,16 @@
                                     options="{'color_field': 'color'}" />
                                 <field name="reason_id" />
                                 <field name="priority" widget="priority" />
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="user_closed_id" readonly="not can_edit_admin_fields"/>
+                                <field name="date_close" readonly="not can_edit_admin_fields"/>
+                            </group>
+                            <group>
+                                <field name="user_validated_id" readonly="not can_edit_admin_fields"/>
+                                <field name="date_validated" readonly="not can_edit_admin_fields"/>
                             </group>
                         </group>
                         <notebook>

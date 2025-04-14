@@ -96,7 +96,12 @@ class QualityAlert(models.Model):
 
     user_closed_id = fields.Many2one('res.users', 'Closed By', tracking=True)
     user_validated_id = fields.Many2one('res.users', 'Validated By', tracking=True)
-    date_validated = fields.Datetime("Date Validated")
+    date_validated = fields.Datetime("Date Validated", tracking=True)
+
+    can_edit_admin_fields = fields.Boolean("Can edit admin fields in quality alerts?", compute="_compute_can_edit_admin_fields")
+
+    def _compute_can_edit_admin_fields(self):
+        self.write({'can_edit_admin_fields': self.env.user.has_group("quality.group_quality_manager")})
 
     @api.depends("risk_probability", "risk_severity")
     def _compute_risk_level(self):
