@@ -46,12 +46,12 @@ class StockPicking(models.Model):
                             if not existing_quality_check:
                                 quality_check_values.append({
                                     'product_id': move.product_id.id,
-                                    'lot_id': lot.id,
+                                    'lot_id': lot and lot.id,
                                     'measure_on': quality_point.measure_on,
                                     'picking_id': picking.id,
                                     'point_id': quality_point.id,
-                                    'test_type_id': quality_point.test_type_id.id,
-                                    'team_id': quality_point.team_id.id,
+                                    'test_type_id': quality_point.test_type_id and quality_point.test_type_id.id,
+                                    'team_id': quality_point.team_id and quality_point.team_id.id,
                                     'note': quality_point.note,
                                 })
         self.env['quality.check'].sudo().create(quality_check_values)
