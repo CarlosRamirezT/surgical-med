@@ -18,10 +18,3 @@ class QualityPoint(models.Model):
         },
     )
     
-    def _get_checks_values(self, products, company_id, existing_checks=False):
-        point_values = super(QualityPoint, self)._get_checks_values(products, company_id, existing_checks)
-
-        # TODO: implement this logic
-
-        return point_values
-    

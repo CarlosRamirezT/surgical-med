@@ -10,41 +10,41 @@ class StockMove(models.Model):
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
-    @api.model
-    def create(self, vals):
-        picking = super(StockPicking, self).create(vals)
-        self._create_quality_checks(picking)
-        return picking
-
     def button_validate(self):
-        self._validate_quality_checks()
-        return super(StockPicking, self).button_validate()
+        res = super(StockPicking, self).button_validate()
+        self._create_quality_checks()
+        return res
     
-    def _create_quality_checks(self, picking):
-        if picking.picking_type_id.code in ['incoming', 'internal']:
-            for move in picking.move_ids:
-                company = self.env.company
-                team_id = company.quality_alert_team_id.id
-                test_type_id = company.quality_point_test_type_id.id
-
-                quality_check = self.env['quality.check'].create({
-                    'picking_id': picking.id,
-                    'product_id': move.product_id.id,
-                    'team_id': team_id,
-                    'test_type_id': test_type_id,
-                    # 'product_qty': move.product_uom_qty,
-                    # 'state': 'pending',
-                })
-                move.quality_check_id = quality_check.id
-    
-    def _validate_quality_checks(self):
+    def _create_quality_checks(self):
+        # create quality checks for lot/serials
+        quality_check_values = list()
         for picking in self:
-            pending_checks = self.env['quality.check'].search([
-                ('picking_id', '=', picking.id),
-                ('quality_state', '!=', 'pass')
-            ])
-            if pending_checks:
-                pending_products = '\n'.join(pending_checks.mapped('product_id.display_name'))
-                raise ValidationError(_(
-                    "No se puede validar el picking porque los siguientes productos tienen quality checks pendientes:\n\n%s"
-                ) % pending_products)
+            # get quality points that apply for this picking
+            quality_points = self.env['quality.point'].sudo().search(
+                [
+                    ('measure_on', '=', 'lot_id'),
+                    ('picking_type_ids', 'in', picking.picking_type_id.ids),
+                    '|', 
+                    ('product_ids', 'in', picking.move_lines.mapped('product_id').ids),
+                    ('product_ids', '=', False),
+                    '|',
+                    ('product_category_ids', 'in', picking.move_lines.mapped('product_id.categ_id').ids),
+                    ('product_category_ids', '=', False),
+                ]
+            )
+            for quality_point in quality_points:
+                for move in picking.move_lines:
+                    if move.product_id in quality_point.product_ids or not quality_point.product_ids:
+                        for lot in move.lot_ids:
+                            # create quality check for each lot/serial
+                            quality_check_values.append({
+                                'product_id': move.product_id.id,
+                                'lot_id': lot.id,
+                                'measure_on': quality_point.measure_on,
+                                'picking_id': picking.id,
+                                'point_id': quality_point.id,
+                                'test_type_id': quality_point.test_type_id.id,
+                                'team_id': quality_point.team_id.id,
+                                'note': quality_point.note,
+                            })
+        self.env['quality.check'].sudo().create(quality_check_values)

@@ -7,6 +7,6 @@ from . import quality_evaluation_supplier_line
 from . import quality_supplier_document_template
 from . import quality_supplier_document
 from . import helpdesk_ticket
-from . import stock_picking
 from . import quality_point
 from . import quality_check
+from . import stock_picking
