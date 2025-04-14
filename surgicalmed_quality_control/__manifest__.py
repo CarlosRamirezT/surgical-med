@@ -6,7 +6,7 @@
     "website": "https://surgicalmed.es/",
     "category": "Manufacturing/Quality",
     "version": "17.0.0.1",
-    "depends": ["quality_control", "helpdesk"],
+    "depends": ["quality_control", "helpdesk", "sign"],
     "data": [
         "security/ir.model.access.csv",
 

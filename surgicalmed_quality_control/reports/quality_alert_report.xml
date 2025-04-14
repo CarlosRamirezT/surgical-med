@@ -381,8 +381,8 @@
                                 <span t-field="doc.user_closed_id.name"/>
                             </td>
                             <td colspan="2" class="text-center">
-                                <t t-if="doc.user_closed_id.signature">
-                                    <t t-out="doc.user_closed_id.signature or ''"/>
+                                <t t-if="doc.user_closed_id.sign_signature">
+                                    <img t-att-src="'data:image/png;base64,' + doc.user_closed_id.sign_signature" alt=""/>
                                 </t>
                             </td>
                             <td colspan="1" class="text-center">
@@ -410,8 +410,8 @@
                                 <span t-field="doc.user_validated_id.name"/>
                             </td>
                             <td colspan="2" class="text-center">
-                                <t t-if="doc.user_validated_id.signature">
-                                    <t t-out="doc.user_validated_id.signature or ''"/>
+                                <t t-if="doc.user_validated_id.sign_signature">
+                                    <img t-att-src="'data:image/png;base64,' + doc.user_validated_id.sign_signature" alt=""/>
                                 </t>
                             </td>
                             <td colspan="1" class="text-center">
