@@ -20,14 +20,24 @@
                                 <strong>Fecha:</strong>
                             </td>
                             <td colspan="1" class="text-center">
+                                <span t-field="doc.date" t-field-options='{"widget": "date"}'/>
                             </td>
                             <td colspan="1" class="text-right">
                                 <strong>Notificado:</strong>
                             </td>
                             <td colspan="1" class="text-center">
+                                 <t t-if="doc.notified">
+                                    <span>[X]</span>
+                                </t>
+                                <t t-else="">
+                                    <span>[ ]</span>
+                                </t>
                             </td>
                             <td colspan="1" class="text-right">
                                 <strong>No.:</strong>
+                            </td>
+                            <td colspan="1" class="text-center">
+                                <span t-field="doc.name"/>
                             </td>
                         </tr>
                         <tr>
@@ -47,11 +57,14 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="1" class="text-left">
+                            <td colspan="1" class="text-center">
+                                <span t-field="doc.product_id.default_code"/>
                             </td>
-                            <td colspan="4" class="text-left">
+                            <td colspan="4" class="text-center">
+                                <span t-field="doc.product_id.name"/>
                             </td>
-                            <td colspan="1" class="text-left">
+                            <td colspan="1" class="text-center">
+                                <span t-field="doc.lot_id.name"/>
                             </td>
                         </tr>
                         <tr>
@@ -67,10 +80,13 @@
                         </tr>
                         <tr>
                             <td colspan="2" class="text-left">
+                                <span t-field="doc.description"/>
                             </td>
                             <td colspan="2" class="text-left">
+                                <span t-field="doc.identified_hazard"/>
                             </td>
                             <td colspan="2" class="text-left">
+                                <span t-field="doc.potential_impact"/>
                             </td>
                         </tr>
                         <tr>
@@ -194,6 +210,7 @@
                                 </t>
                             </td>
                             <td colspan="1" class="text-center">
+                                <span t-field="doc.risk_level"/>
                             </td>
                         </tr>
                         <tr>
@@ -360,6 +377,19 @@
                             </td>
                         </tr>
                         <tr>
+                            <td colspan="3" class="text-center">
+                                <span t-field="doc.user_closed_id.name"/>
+                            </td>
+                            <td colspan="2" class="text-center">
+                                <t t-if="doc.user_closed_id.signature">
+                                    <t t-out="doc.user_closed_id.signature or ''"/>
+                                </t>
+                            </td>
+                            <td colspan="1" class="text-center">
+                                <span t-field="doc.date_close"/>
+                            </td>
+                        </tr>
+                        <tr>
                             <td colspan="6" class="text-center">
                                 <strong>Revisado por:</strong>
                             </td>
@@ -373,6 +403,19 @@
                             </td>
                             <td colspan="1" class="text-center">
                                 <strong>Fecha</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-center">
+                                <span t-field="doc.user_validated_id.name"/>
+                            </td>
+                            <td colspan="2" class="text-center">
+                                <t t-if="doc.user_validated_id.signature">
+                                    <t t-out="doc.user_validated_id.signature or ''"/>
+                                </t>
+                            </td>
+                            <td colspan="1" class="text-center">
+                                <span t-field="doc.date_validated"/>
                             </td>
                         </tr>
                         <tr>

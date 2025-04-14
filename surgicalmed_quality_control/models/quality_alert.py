@@ -94,6 +94,10 @@ class QualityAlert(models.Model):
         store=True,
     )
 
+    user_closed_id = fields.Many2one('res.users', 'Closed By', tracking=True)
+    user_validated_id = fields.Many2one('res.users', 'Validated By', tracking=True)
+    date_validated = fields.Date("Date Validated")
+
     @api.depends("risk_probability", "risk_severity")
     def _compute_risk_level(self):
         risk_probability_value = {
