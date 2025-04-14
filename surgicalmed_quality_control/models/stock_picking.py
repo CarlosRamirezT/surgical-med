@@ -37,14 +37,21 @@ class StockPicking(models.Model):
                     if move.product_id in quality_point.product_ids or not quality_point.product_ids:
                         for lot in move.lot_ids:
                             # create quality check for each lot/serial
-                            quality_check_values.append({
-                                'product_id': move.product_id.id,
-                                'lot_id': lot.id,
-                                'measure_on': quality_point.measure_on,
-                                'picking_id': picking.id,
-                                'point_id': quality_point.id,
-                                'test_type_id': quality_point.test_type_id.id,
-                                'team_id': quality_point.team_id.id,
-                                'note': quality_point.note,
-                            })
+                            # check if already exists
+                            existing_quality_check = self.env['quality.check'].sudo().search([
+                                ('product_id', '=', move.product_id.id),
+                                ('lot_id', '=', lot.id),
+                                ('point_id', '=', quality_point.id),
+                            ])
+                            if not existing_quality_check:
+                                quality_check_values.append({
+                                    'product_id': move.product_id.id,
+                                    'lot_id': lot.id,
+                                    'measure_on': quality_point.measure_on,
+                                    'picking_id': picking.id,
+                                    'point_id': quality_point.id,
+                                    'test_type_id': quality_point.test_type_id.id,
+                                    'team_id': quality_point.team_id.id,
+                                    'note': quality_point.note,
+                                })
         self.env['quality.check'].sudo().create(quality_check_values)
