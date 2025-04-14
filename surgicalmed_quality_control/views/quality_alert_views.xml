@@ -81,6 +81,10 @@
                         </group>
                         <group>
                             <group>
+                                <field name="user_id" readonly="not can_edit_admin_fields"/>
+                                <field name="date_assign" readonly="not can_edit_admin_fields"/>
+                            </group>
+                            <group>
                                 <field name="user_closed_id" readonly="not can_edit_admin_fields"/>
                                 <field name="date_close" readonly="not can_edit_admin_fields"/>
                             </group>
@@ -115,10 +119,6 @@
                                         <field name="partner_id" />
                                         <field name="company_id" groups="base.group_multi_company" />
                                         <field name="email_cc" groups="base.group_no_one" />
-                                    </group>
-                                    <group>
-                                        <field name="date_assign" />
-                                        <field name="date_close" invisible="not date_close" />
                                     </group>
                                 </group>
                             </page>
