@@ -25,10 +25,10 @@ class StockPicking(models.Model):
                     ('measure_on', '=', 'lot_id'),
                     ('picking_type_ids', 'in', picking.picking_type_id.ids),
                     '|', 
-                    ('product_ids', 'in', picking.move_lines.mapped('product_id').ids),
+                    ('product_ids', 'in', picking.move_ids_without_package.mapped('product_id').ids),
                     ('product_ids', '=', False),
                     '|',
-                    ('product_category_ids', 'in', picking.move_lines.mapped('product_id.categ_id').ids),
+                    ('product_category_ids', 'in', picking.move_ids_without_package.mapped('product_id.categ_id').ids),
                     ('product_category_ids', '=', False),
                 ]
             )
