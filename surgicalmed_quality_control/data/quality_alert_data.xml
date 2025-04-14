@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="quality_alert_stage_validated" model="quality.alert.stage">
+        <field name="name">Validated</field>
+        <field name="folded">True</field>
+        <field name="validated">True</field>
+    </record>
+
+</odoo>

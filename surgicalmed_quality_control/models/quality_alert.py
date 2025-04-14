@@ -96,7 +96,7 @@ class QualityAlert(models.Model):
 
     user_closed_id = fields.Many2one('res.users', 'Closed By', tracking=True)
     user_validated_id = fields.Many2one('res.users', 'Validated By', tracking=True)
-    date_validated = fields.Date("Date Validated")
+    date_validated = fields.Datetime("Date Validated")
 
     @api.depends("risk_probability", "risk_severity")
     def _compute_risk_level(self):
@@ -124,4 +124,18 @@ class QualityAlert(models.Model):
             else:
                 record.risk_level = "none"
 
+    @api.onchange("stage_id")
+    def _onchange_stage_id(self):
+        for alert in self.filtered(lambda x: x.stage_id):
+            if alert.stage_id.done and not alert.user_closed_id:
+                alert.user_closed_id = alert.env.user.id
+                alert.date_close = fields.Datetime.now()
+            elif alert.stage_id.validated and not alert.user_validated_id:
+                alert.user_validated_id = alert.env.user.id
+                alert.date_validated = fields.Datetime.now()
 
+
+class QualityAlertStage(models.Model):
+    _inherit = 'quality.alert.stage'
+
+    validated = fields.Boolean("Validated by a supervisor")

@@ -18,9 +18,12 @@
         "views/quality_supplier_document_template_views.xml",
         "views/quality_supplier_document_views.xml",
         "views/helpdesk_ticket_views.xml",
+        "views/quality_alert_stage_views.xml",
         
         "wizards/quality_action_notify_wizard_views.xml",
 
         "reports/quality_alert_report.xml",
+
+        "data/quality_alert_data.xml",
     ],
 }
