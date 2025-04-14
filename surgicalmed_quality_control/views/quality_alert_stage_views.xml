@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 
-    <record id="view_quality_alert_type_tree" model="ir.ui.view">
-        <field name="name">quality.alert.type.tree.inherit</field>
-        <field name="model">quality.alert.type</field>
+    <record id="view_quality_alert_stage_tree" model="ir.ui.view">
+        <field name="name">quality.alert.stage.tree.inherit</field>
+        <field name="model">quality.alert.stage</field>
         <field name="inherit_id" ref="quality_control.quality_alert_stage_view_tree"/>
         <field name="arch" type="xml">
             <xpath expr="//field['done']" position="after">
