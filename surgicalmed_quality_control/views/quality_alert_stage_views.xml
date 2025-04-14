@@ -6,7 +6,7 @@
         <field name="model">quality.alert.stage</field>
         <field name="inherit_id" ref="quality_control.quality_alert_stage_view_tree"/>
         <field name="arch" type="xml">
-            <xpath expr="//field['done']" position="after">
+            <xpath expr="//tree/field['done']" position="after">
                 <field name="validated"/>
             </xpath>
         </field>
